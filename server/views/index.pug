@@ -4,10 +4,24 @@ block title
     title Koa Douban 首页
 
 block content
-    .container
-    .row
-        .col-md-8
-            h1 Hi #{you}
-            p This is #{me}
-        .col-md-4
-            p 测试页面 Pug模板引擎 
+    include ./includes/header
+    .container-fluid
+        .sidebar
+        .content
+            .row
+                .col-md-6
+                    .card
+                        img.card-img-top(src="",data-video="")
+                        .card-body
+                            h4.card-title 这是电影标题
+                            p.card-desc 这个电影描述
+                        .card-footer
+                            small.text-muted 1 天前更新
+                .col-md-6
+                    .card
+                        img.card-img-top(src="",data-video="")
+                        .card-body
+                            h4.card-title 这是电影标题
+                            p.card-desc 这个电影描述
+                        .card-footer
+                            small.text-muted 1 天前更新
