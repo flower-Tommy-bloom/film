@@ -21,9 +21,12 @@
   },
   "homepage": "https://github.com/flower-Tommy-bloom/film#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "ejs": "^2.6.1",
+    "glob": "^7.1.4",
     "koa": "^2.7.0",
     "koa-views": "^6.2.0",
+    "mongoose": "^5.5.11",
     "pug": "^2.0.3",
     "puppeteer": "^1.15.0"
   }

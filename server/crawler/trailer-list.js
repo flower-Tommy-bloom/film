@@ -1,6 +1,8 @@
+const fs = require('fs')
 const puppeteer = require('puppeteer')
+const { resolve } = require('path')
 
-const url = `https://movie.douban.com/tag/#/?sort=R&range=6,10&tags=%E7%94%B5%E5%BD%B1,%E6%BE%B3%E5%A4%A7%E5%88%A9%E4%BA%9A`
+const url = `https://movie.douban.com/tag/#/?sort=S&range=0,10&tags=电影`
 
 const sleep = time => new Promise(resolve => {
   setTimeout(resolve, time)
@@ -15,18 +17,26 @@ const sleep = time => new Promise(resolve => {
   })
 
   const page = await browser.newPage()
+
   await page.goto(url, {
     waitUntil: 'networkidle2'
   })
 
-  await sleep(3000)
+  await sleep(1000)
 
-//   await page.waitForSelector('.more')
+  await page.waitForSelector('.more')
 
-//   for (let i = 0; i < 2; i++) {
-//     await sleep(3000)
-//     await page.click('.more')
-//   }
+  let _a = 100
+  for (let i = 0; i < _a; i++) {
+    await sleep(1000)
+    try {
+      await page.click('.more')
+    }
+    catch(err) {
+      _a = 1
+      console.log(i,err)
+    }
+  }
 
   const result = await page.evaluate(() => {
     var $ = window.$
@@ -54,8 +64,12 @@ const sleep = time => new Promise(resolve => {
   })
 
   browser.close()
-  console.log(result)
-  console.log(result.length)
-//   process.send({result})
-//   process.exit(0)
+  process.send({result})
+  process.exit(0)
+  // let data = JSON.stringify(result)
+  // let time = new Date().getTime()
+  // fs.writeFile(__dirname + '/data/' + time +'.json',data,(err,data) => {
+  //   if(err) console.log(err)
+  //   console.log('文件已保存',result.length+'条数据')
+  // })
 })()
