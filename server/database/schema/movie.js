@@ -12,21 +12,21 @@ const movieSchema = new Schema({
     },
     rete:Number,
     title:String,
-    summary:String,
-    video:String,
-    poster:String,
-    cover:String,
-
-    visioKey:String, // 转存到自己的服务器时用的key
-    posterKey:String,
-    coverKey:String,
-
-    rawTitle:String, // 标题
+    poster:String, // 海报
+    
+    cover:String, // 封面
+    actors:[String],
     movieTypes:[String], // 数组 里面是字符串
+    site:String, // 地区
+    summary:String, // 简介
+    video:String, // 预告片
+
+    // visioKey:String, // 转存到自己的服务器时用的key
+    // posterKey:String,
+    // coverKey:String,
     pubdate:Mixed,
     year:Number,
-    tags:Array,
-
+    review:Mixed, // 评论
     meta: {
         createdAt: {
             type: Date,
@@ -41,9 +41,9 @@ const movieSchema = new Schema({
 // 保存之前
 movieSchema.pre('save', function(next){
     if(this.isNew) { // 是不是新的
-        this.meta.createdAt = this.meta.updateAt = Datenpm.now()
+        this.meta.createdAt = this.meta.updateAt = Date.now()
     } else {
-        this.meta.updateAt = Datenpm.now()
+        this.meta.updateAt = Date.now()
     }
     next()
 })

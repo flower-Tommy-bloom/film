@@ -5,11 +5,12 @@ const views = require('koa-views')
 const { resolve } = require('path')
 const { connect, initSchemas } = require('./database/init')
 
-;(async () => {
-    await connect()
-    initSchemas()
-    require('./tasks/movie')
-})()
+// ;(async () => {
+//     await connect()
+//     initSchemas()
+//     // require('./tasks/movie')
+//     require('../test/findData')
+// })()
 
 app.use(views(resolve(__dirname,'./views'), {
     extension:'pug'
