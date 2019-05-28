@@ -29,6 +29,7 @@
     "glob": "^7.1.4",
     "jquery": "^1.12.4",
     "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "koa-views": "^6.2.0",
     "lodash": "^4.17.11",

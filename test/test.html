@@ -7,6 +7,24 @@
     <title>Koa Server HTML</title>
 </head>
 <body>
-    <img src="http://img1.imgtn.bdimg.com/it/u=346499591,2536486172&fm=26&gp=0.jpgZ" onerror="{this.src='error.jpg'}" >
+    
 </body>
 </html>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$.post({
+    url:'http://localhost:3001/api/login',
+    data:{user:'aaaa',pwd:'asdf'},
+    success:function(res){
+        console.log(res)
+    }
+})
+$.get({
+    url:'http://localhost:3001/api/movies',
+    dataType:'json',
+    contentType:'application/x-www-form-urlencoded',
+    success:function(res){
+        console.log(res)
+    }
+})
+</script>

@@ -1,29 +1,18 @@
 const Koa = require('koa')
 const app = new Koa()
 const mongoose = require('mongoose')
-const views = require('koa-views')
 const { resolve } = require('path')
-const { connect, initSchemas, initAdmin } = require('./database/init')
+const { connect, initSchemas } = require('./database/init')
+const bodyParser = require('koa-bodyparser')
+const router = require('./routes')
 
-const R = require('ramda')
-const MIDDLEWARES = ['router']
-
-const useMiddlewares = app => {
-    R.map(R.compose(
-        R.forEachObjIndexed(
-            initWith(app)
-        ),
-        require,
-        name => resolve(__dirname, `./middlewares/${name}`)
-    ))(MIDDLEWARES)
-}
 ;(async () => {
     await connect()
-    initSchemas()
-    await initAdmin()
-
-    const app = new Koa()
-    await useMiddlewares(app)
+    await initSchemas()
+    app
+        .use(bodyParser())
+        .use(router.routes())
+        .use(router.allowedMethods())
     app.listen(3001)
 })()
 
